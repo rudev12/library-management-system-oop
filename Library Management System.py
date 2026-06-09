@@ -24,14 +24,19 @@ class Book:
             self.available = True
         else:
             print("Book Was Not Borrowed")
+    
+    def update_title(self, new_title):
+        if new_title == " ":
+            print("Title Cannot Be Empty")
+        else:
+            self.title = new_title
+            print("Title Updated Successfully")
+            print("Title:",self.title)
         
 b1 = Book(101,"Python Basics", "Rudhraksh")
 
 b1.show_book()
 
-b1.borrow_book()
-b1.borrow_book()
-
-b1.return_book()
+b1.update_title("Advanced Python")
 
 b1.show_book()
