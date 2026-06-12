@@ -1,84 +1,89 @@
-# Library Management System (Python OOP)
+# Library Management System
 
-## Project Overview
+## Overview
 
-This is a beginner-friendly Library Management System built using Python and Object-Oriented Programming (OOP) concepts.
+A simple Library Management System built using Python and Object-Oriented Programming (OOP) concepts.
 
-The project allows users to:
-
-* Store book information
-* Borrow books
-* Return books
-* View book details
-* Update book titles
-* Track book availability using a unique Book ID
+This project allows librarians to manage books using unique Book IDs. The system supports adding, searching, removing, borrowing, and returning books.
 
 ## Features
 
-### 1. Add Book Details
-
-Each book contains:
-
-* Book ID
-* Title
-* Author
-* Availability Status
-
-### 2. Show Book Information
-
-Display all details of a book including:
-
-* Book ID
-* Title
-* Author
-* Availability Status
-
-### 3. Borrow Book
-
-* Marks the book as borrowed
-* Prevents borrowing if the book is already borrowed
-
-### 4. Return Book
-
-* Marks the book as available again
-* Prevents returning a book that was never borrowed
-
-### 5. Update Book Title
-
-* Allows updating the title of an existing book
-* Rejects empty titles
-* Displays the updated title after a successful update
+* Add books to the library
+* Search books using Book ID
+* Remove books using Book ID
+* Borrow books
+* Return books
+* Update book titles
+* Display book information
+* Basic input validation
 
 ## OOP Concepts Used
 
 * Classes and Objects
-* Constructors (**init**)
-* Attributes
+* Constructors (`__init__`)
 * Methods
-* State Management
-* Basic Validation
+* Encapsulation
+* Dictionaries for data storage
+* Object references
 
-## Example Output
+## Project Structure
 
-Book Borrowed Successfully
+### Library Class
 
-Book Returned Successfully
+Handles library operations such as:
 
-Title Updated Successfully
+* Add Book
+* Search Book
+* Remove Book
+* Show Library Information
 
-Title: Advanced Python
+### Book Class
 
-## Future Improvements
+Handles book-related operations such as:
 
-* Multiple Book Management
-* Borrower Information
-* Borrow History
-* Book Search by ID
-* Dictionary-Based Library Storage
-* Menu Driven System
-* File Handling for Data Persistence
+* Show Book Information
+* Borrow Book
+* Return Book
+* Update Title
+
+## Example Usage
+
+```python
+b1 = Book(101, "Python Basics", "Rudhraksh")
+
+l1 = Library("Mumbai Library", "Mumbai")
+
+l1.add_book(b1)
+
+book = l1.search_book(101)
+book.show_book()
+
+l1.remove_book(101)
+```
+
+## Current Version
+
+Version: v0.1
+
+### Completed Features
+
+* Add Book
+* Search Book
+* Remove Book
+* Borrow Book
+* Return Book
+* Update Title
+
+### Planned Features
+
+* Show All Books
+* Improved Validation
+* Admin Controls
+* File Storage
+* Graphical User Interface (GUI)
 
 ## Author
 
 Rudhraksh Shukla
+
 Python Learning Project
