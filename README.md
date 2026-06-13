@@ -2,20 +2,30 @@
 
 ## Overview
 
-A simple Library Management System built using Python and Object-Oriented Programming (OOP) concepts.
+A Library Management System built using Python and Object-Oriented Programming (OOP) concepts.
 
-This project allows librarians to manage books using unique Book IDs. The system supports adding, searching, removing, borrowing, and returning books.
+This project allows users to manage books in a library using unique Book IDs. The system supports adding, searching, removing, borrowing, returning, and updating books while maintaining library statistics.
+
+---
 
 ## Features
 
+### Library Features
+
 * Add books to the library
-* Search books using Book ID
-* Remove books using Book ID
-* Borrow books
-* Return books
-* Update book titles
+* Search books by Book ID
+* Remove books from the library
+* Show all books in the library
+* Display library statistics
+
+### Book Features
+
 * Display book information
-* Basic input validation
+* Borrow a book
+* Return a book
+* Update book title
+
+---
 
 ## OOP Concepts Used
 
@@ -23,67 +33,98 @@ This project allows librarians to manage books using unique Book IDs. The system
 * Constructors (`__init__`)
 * Methods
 * Encapsulation
-* Dictionaries for data storage
-* Object references
+* Object References
+* Dictionary-based Data Storage
+
+---
 
 ## Project Structure
 
 ### Library Class
 
-Handles library operations such as:
+Responsible for managing the library.
 
-* Add Book
-* Search Book
-* Remove Book
-* Show Library Information
+Methods:
+
+* `show_library()`
+* `add_book()`
+* `search_book()`
+* `remove_book()`
+* `show_all_books()`
+* `library_stats()`
 
 ### Book Class
 
-Handles book-related operations such as:
+Responsible for managing book information.
 
-* Show Book Information
-* Borrow Book
-* Return Book
-* Update Title
+Methods:
+
+* `show_book()`
+* `borrow_book()`
+* `return_book()`
+* `update_title()`
+
+---
 
 ## Example Usage
 
 ```python
 b1 = Book(101, "Python Basics", "Rudhraksh")
+b2 = Book(102, "C++ Basics", "Swayam")
 
 l1 = Library("Mumbai Library", "Mumbai")
 
 l1.add_book(b1)
+l1.add_book(b2)
 
-book = l1.search_book(101)
-book.show_book()
+l1.show_all_books()
 
-l1.remove_book(101)
+l1.library_stats()
 ```
+
+---
+
+## Sample Output
+
+```text
+Total Books: 2
+Total Available Books: 2
+Total Borrowed Books: 0
+```
+
+---
 
 ## Current Version
 
-Version: v0.1
+### Version: v0.2
 
-### Completed Features
+Completed Features:
 
 * Add Book
 * Search Book
 * Remove Book
+* Show All Books
+* Library Statistics
 * Borrow Book
 * Return Book
 * Update Title
 
-### Planned Features
+---
 
-* Show All Books
-* Improved Validation
-* Admin Controls
+## Upcoming Features
+
+* Search Book by Title
+* Search Book by Author
+* Employee Management
+* Librarian Management
 * File Storage
-* Graphical User Interface (GUI)
+* Database Integration
+* GUI Interface
+
+---
 
 ## Author
 
 Rudhraksh Shukla
 
-Python Learning Project
+Python OOP Learning Project
