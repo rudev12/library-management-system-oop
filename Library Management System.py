@@ -33,6 +33,29 @@ class Library:
             del self.books[book_id]
             print("Book Removed Sucessfully")
             return book
+    def show_all_books(self):
+        if len(self.books) == 0:
+            print("No Books Available In Library")
+        else:
+            for book in self.books.values():
+                book.show_book()
+                
+    def library_stats(self):
+        if len(self.books) == 0:
+            print("No Books in library")
+        else:
+            total_books = len(self.books)
+            available_books = 0
+            for book in self.books.values():
+                if book.available :
+                    available_books += 1
+                    
+                    borrowed_books = total_books - available_books
+                    
+        
+            print("Total Books:",total_books)
+            print("Total Available Books:",available_books)
+            print("Total Borrowed Books:",borrowed_books)
 
 class Book:
     def __init__(self,book_id,title,author):
@@ -74,6 +97,6 @@ b2 = Book(102,"C++ Basics ","Swayam")
 l1 = Library("Mumbai Library", "Mumbai")
 l1.add_book(b1)
 l1.add_book(b2)
-book = l1.remove_book(101)
-book.show_book()
-b2.show_book()
+b2.borrow_book()
+
+l1.library_stats()
