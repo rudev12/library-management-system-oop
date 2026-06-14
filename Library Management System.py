@@ -51,11 +51,40 @@ class Library:
                     available_books += 1
                     
                     borrowed_books = total_books - available_books
-                    
-        
+    
             print("Total Books:",total_books)
             print("Total Available Books:",available_books)
             print("Total Borrowed Books:",borrowed_books)
+            
+    def search_by_title(self,book_title):
+        matched_book = []
+        if book_title == "  ":
+            print("Title Cannot Be Empty")
+        else:
+            for book in self.books.values():
+                if book.title == book_title:
+                    matched_book.append(book)
+        if len(matched_book) == 0:
+            print("No Book Found")
+        
+        return matched_book
+        
+        
+    def search_by_author(self,author):
+        matched_author = []
+        if author == "  ":
+            print("Author Name Cannot Be Empty")
+            
+        for book in self.books.values():
+            if book.author == author:
+                matched_author.append(book)
+        if len(matched_author) == 0:
+            print("No Author's Book Found")
+        
+        return matched_author
+    
+
+    
 
 class Book:
     def __init__(self,book_id,title,author):
@@ -98,5 +127,10 @@ l1 = Library("Mumbai Library", "Mumbai")
 l1.add_book(b1)
 l1.add_book(b2)
 b2.borrow_book()
-
 l1.library_stats()
+result =l1.search_by_title("Python Basics")
+for book in result:
+    book.show_book()
+final =l1.search_by_author("Swayam")
+for book in final:
+    book.show_book()
