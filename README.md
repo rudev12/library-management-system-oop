@@ -1,48 +1,86 @@
-# Library Management System
+# 📚 Library Management System
 
 ## Overview
 
-A Library Management System built using Python and Object-Oriented Programming (OOP) concepts.
+A Python-based Library Management System built using Object-Oriented Programming (OOP) concepts.
 
-This project allows users to manage books in a library using unique Book IDs. The system supports adding, searching, removing, borrowing, returning, and updating books while maintaining library statistics.
-
----
-
-## Features
-
-### Library Features
-
-* Add books to the library
-* Search books by Book ID
-* Remove books from the library
-* Show all books in the library
-* Display library statistics
-
-### Book Features
-
-* Display book information
-* Borrow a book
-* Return a book
-* Update book title
+This project allows users to manage books inside a library by adding, searching, borrowing, returning, updating, and removing books while also generating library statistics.
 
 ---
 
-## OOP Concepts Used
+# Features
+
+## Library Features
+
+### Add Book
+
+Add a new book to the library.
+
+### Search Book by ID
+
+Search and retrieve a book using its unique Book ID.
+
+### Remove Book
+
+Remove a book from the library collection.
+
+### Show All Books
+
+Display all books currently available in the library.
+
+### Library Statistics
+
+Display:
+
+* Total Books
+* Available Books
+* Borrowed Books
+
+### Search by Title
+
+Search books using their title.
+
+### Search by Author
+
+Search books written by a specific author.
+
+---
+
+## Book Features
+
+### Show Book Details
+
+Display complete information about a book.
+
+### Borrow Book
+
+Mark a book as borrowed.
+
+### Return Book
+
+Mark a borrowed book as returned.
+
+### Update Title
+
+Update the title of a book.
+
+---
+
+# OOP Concepts Used
 
 * Classes and Objects
 * Constructors (`__init__`)
 * Methods
-* Encapsulation
 * Object References
-* Dictionary-based Data Storage
+* Dictionaries
+* Encapsulation
+* Composition
 
 ---
 
-## Project Structure
+# Project Structure
 
-### Library Class
-
-Responsible for managing the library.
+## Library Class
 
 Methods:
 
@@ -52,10 +90,12 @@ Methods:
 * `remove_book()`
 * `show_all_books()`
 * `library_stats()`
+* `search_by_title()`
+* `search_by_author()`
 
-### Book Class
+---
 
-Responsible for managing book information.
+## Book Class
 
 Methods:
 
@@ -66,7 +106,7 @@ Methods:
 
 ---
 
-## Example Usage
+# Example Usage
 
 ```python
 b1 = Book(101, "Python Basics", "Rudhraksh")
@@ -77,54 +117,59 @@ l1 = Library("Mumbai Library", "Mumbai")
 l1.add_book(b1)
 l1.add_book(b2)
 
-l1.show_all_books()
+b2.borrow_book()
 
 l1.library_stats()
+
+result = l1.search_by_title("Python Basics")
+
+for book in result:
+    book.show_book()
+
+final = l1.search_by_author("Swayam")
+
+for book in final:
+    book.show_book()
 ```
 
 ---
 
-## Sample Output
+# Current Version
 
-```text
-Total Books: 2
-Total Available Books: 2
-Total Borrowed Books: 0
-```
-
----
-
-## Current Version
-
-### Version: v0.2
+## Version 0.3
 
 Completed Features:
 
 * Add Book
-* Search Book
+* Search Book by ID
 * Remove Book
 * Show All Books
 * Library Statistics
 * Borrow Book
 * Return Book
 * Update Title
+* Search by Title
+* Search by Author
 
 ---
 
-## Upcoming Features
+# Future Improvements
 
-* Search Book by Title
-* Search Book by Author
 * Employee Management
 * Librarian Management
-* File Storage
-* Database Integration
-* GUI Interface
+* Fine Management System
+* Issue Date & Return Date Tracking
+* File Handling (Save Data)
+* JSON Storage
+* Database Integration (SQLite/MySQL)
+* Login System
+* GUI Version using Tkinter
+* Web Version using Flask/Django
 
 ---
 
-## Author
+# Author
 
-Rudhraksh Shukla
+**Rudhraksh Shukla**
 
 Python OOP Learning Project
