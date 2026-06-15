@@ -83,8 +83,13 @@ class Library:
         
         return matched_author
     
-
-    
+    def check_availability(self,book_id):
+        book = self.search_book(book_id)
+        if book is not None:
+            if book.available:
+                print(book_id,":","Book is Available")
+            else:
+                print(book_id,":","Book Not Available")
 
 class Book:
     def __init__(self,book_id,title,author):
@@ -124,13 +129,22 @@ class Book:
 b1 = Book(101,"Python Basics", "Rudhraksh")
 b2 = Book(102,"C++ Basics ","Swayam")
 l1 = Library("Mumbai Library", "Mumbai")
+
 l1.add_book(b1)
+
 l1.add_book(b2)
+
 b2.borrow_book()
+
 l1.library_stats()
+
 result =l1.search_by_title("Python Basics")
 for book in result:
     book.show_book()
+
 final =l1.search_by_author("Swayam")
 for book in final:
     book.show_book()
+    
+    
+l1.check_availability(102)
