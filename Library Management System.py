@@ -90,6 +90,17 @@ class Library:
                 print(book_id,":","Book is Available")
             else:
                 print(book_id,":","Book Not Available")
+                
+    def count_book_by_author(self,author):
+        author_count = 0
+        if author.strip == "":
+            print("Author Name Cannot Be Empty")
+        else:
+            for book in self.books.values():
+                if book.author == author:
+                    author_count += 1 
+        
+        return author_count
 
 class Book:
     def __init__(self,book_id,title,author):
@@ -148,3 +159,11 @@ for book in final:
     
     
 l1.check_availability(102)
+
+
+count = l1.count_book_by_author("rudhraksh")
+
+if count == 0:
+    print("No Author's Book Found")
+else:
+    print("Total Books:", count)
