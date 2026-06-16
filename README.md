@@ -20,6 +20,7 @@ This project allows users to manage books in a library by adding, searching, bor
 * Search Books by Title
 * Search Books by Author
 * Check Book Availability
+* Count Books by Author
 
 ### Book Features
 
@@ -58,6 +59,7 @@ Methods:
 * `search_by_title()`
 * `search_by_author()`
 * `check_availability()`
+* `count_book_by_author()`
 
 ### Book Class
 
@@ -81,30 +83,24 @@ l1 = Library("Mumbai Library", "Mumbai")
 l1.add_book(b1)
 l1.add_book(b2)
 
-b2.borrow_book()
+count = l1.count_book_by_author("Swayam")
+print("Total Books:", count)
 
-l1.library_stats()
+l1.check_availability(101)
 
 result = l1.search_by_title("Python Basics")
 
 for book in result:
     book.show_book()
-
-result = l1.search_by_author("Swayam")
-
-for book in result:
-    book.show_book()
-
-l1.check_availability(101)
 ```
 
 ---
 
 ## Current Version
 
-Version: 0.4
+Version: 0.5
 
-Completed Features:
+Completed Features
 
 1. Add Book
 2. Search Book by ID
@@ -117,14 +113,15 @@ Completed Features:
 9. Search by Title
 10. Search by Author
 11. Check Availability
+12. Count Books by Author
 
 ---
 
 ## Future Improvements
 
 * Update Author
-* Count Books by Author
 * Search by Partial Title
+* Search by Partial Author
 * Employee Management
 * Fine Management System
 * Issue Date Tracking
