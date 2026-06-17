@@ -16,7 +16,7 @@ class Library:
         print("Book Added Successfully")
         
     def search_book(self,book_id):
-        if book_id == "   ":
+        if book_id == "    ":
             print("Book Id Cannot be Empty")
         elif book_id not in self.books:
             print("Book Id Not Exists Please Enter Valid Id")
@@ -42,7 +42,7 @@ class Library:
                 
     def library_stats(self):
         if len(self.books) == 0:
-            print("No Books in library")
+            print("No Books Available in library")
         else:
             total_books = len(self.books)
             available_books = 0
@@ -50,7 +50,7 @@ class Library:
                 if book.available :
                     available_books += 1
                     
-                    borrowed_books = total_books - available_books
+            borrowed_books = total_books - available_books
     
             print("Total Books:",total_books)
             print("Total Available Books:",available_books)
@@ -58,12 +58,14 @@ class Library:
             
     def search_by_title(self,book_title):
         matched_book = []
-        if book_title == "  ":
+        if book_title.strip()== "":
             print("Title Cannot Be Empty")
         else:
             for book in self.books.values():
                 if book.title == book_title:
                     matched_book.append(book)
+        
+        
         if len(matched_book) == 0:
             print("No Book Found")
         
@@ -72,7 +74,7 @@ class Library:
         
     def search_by_author(self,author):
         matched_author = []
-        if author == "  ":
+        if author.strip() == "":
             print("Author Name Cannot Be Empty")
             
         for book in self.books.values():
@@ -93,7 +95,7 @@ class Library:
                 
     def count_book_by_author(self,author):
         author_count = 0
-        if author.strip == "":
+        if author.strip() == "":
             print("Author Name Cannot Be Empty")
         else:
             for book in self.books.values():
@@ -101,6 +103,20 @@ class Library:
                     author_count += 1 
         
         return author_count
+        
+    def search_partial_title(self,title):
+        matched_book = []
+        if title.strip() == "":
+            print("Title Cannot Be Empty")
+        else:
+            for book in self.books.values():
+                if title in book.title:
+                    matched_book.append(book)
+            
+        if len(matched_book) == 0:
+            print("No Book Found")
+            
+        return matched_book
 
 class Book:
     def __init__(self,book_id,title,author):
@@ -130,7 +146,7 @@ class Book:
             print("Book Was Not Borrowed")
     
     def update_title(self, new_title):
-        if new_title == " ":
+        if new_title.strip() == " ":
             print("Title Cannot Be Empty")
         else:
             self.title = new_title
@@ -140,30 +156,9 @@ class Book:
 b1 = Book(101,"Python Basics", "Rudhraksh")
 b2 = Book(102,"C++ Basics ","Swayam")
 l1 = Library("Mumbai Library", "Mumbai")
-
 l1.add_book(b1)
-
 l1.add_book(b2)
 
-b2.borrow_book()
-
-l1.library_stats()
-
-result =l1.search_by_title("Python Basics")
+result = l1.search_partial_title("Python")
 for book in result:
     book.show_book()
-
-final =l1.search_by_author("Swayam")
-for book in final:
-    book.show_book()
-    
-    
-l1.check_availability(102)
-
-
-count = l1.count_book_by_author("rudhraksh")
-
-if count == 0:
-    print("No Author's Book Found")
-else:
-    print("Total Books:", count)
