@@ -12,8 +12,14 @@ class Library:
         print("Total Employee Working:", self.number_employees)
         
     def add_book(self,book):
-        self.books[book.book_id] = book
-        print("Book Added Successfully")
+        if book.book_id in self.books:
+            print("Book Alredy Exists, Please Enter Valid Book Id")
+        else:
+            self.books[book.book_id] = book
+        
+            with open("library_data.txt", "a") as file:
+                file.write(f"{book.book_id},{book.title},{book.author}\n")
+            print("Book Added Successfully")
         
     def search_book(self,book_id):
         if book_id == "    ":
@@ -117,6 +123,21 @@ class Library:
             print("No Book Found")
             
         return matched_book
+    
+    def load_book(self):
+        try:
+            with open("library_data.txt","r") as file:
+                for line in file:
+                    data = line.strip().split(",")
+                    if len(data) == 3:
+                        book_id, title, author = data
+                        book = Book(int(book_id),title,author)
+                        self.books[int(book_id)] = book
+                    else:
+                        print("Invalid data format in line:", line)
+                        continue
+        except FileNotFoundError:
+            print("No Book Data Found")
 
 class Book:
     def __init__(self,book_id,title,author):
@@ -156,9 +177,5 @@ class Book:
 b1 = Book(101,"Python Basics", "Rudhraksh")
 b2 = Book(102,"C++ Basics ","Swayam")
 l1 = Library("Mumbai Library", "Mumbai")
-l1.add_book(b1)
+l1.load_book()
 l1.add_book(b2)
-
-result = l1.search_partial_title("Python")
-for book in result:
-    book.show_book()
