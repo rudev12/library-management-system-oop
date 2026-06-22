@@ -1,10 +1,15 @@
 # Library Management System
 
-## Overview
+A simple Object-Oriented Library Management System built using Python.
 
-A Library Management System built using Python and Object-Oriented Programming (OOP) concepts.
+This project demonstrates the practical use of:
 
-This project allows users to manage books in a library by adding, searching, borrowing, returning, updating, and removing books. It also provides library statistics and multiple search options.
+* Object-Oriented Programming (OOP)
+* Classes and Objects
+* Dictionaries
+* File Handling
+* Data Persistence
+* Searching and Filtering
 
 ---
 
@@ -12,35 +17,52 @@ This project allows users to manage books in a library by adding, searching, bor
 
 ### Library Features
 
-* Add Book
-* Search Book by ID
-* Remove Book
-* Show All Books
-* Library Statistics
-* Search Books by Title
-* Search Books by Author
-* Check Book Availability
-* Count Books by Author
+* Add new books
+* Prevent duplicate book IDs
+* Search books by ID
+* Remove books
+* Display all books
+* Check book availability
+* Library statistics
+* Count books by author
+* Search books by title
+* Search books by author
+* Partial title search
 
 ### Book Features
 
-* Show Book Details
-* Borrow Book
-* Return Book
-* Update Book Title
+* Borrow books
+* Return books
+* Update book title
+* Display book details
+
+### File Handling Features
+
+* Save books permanently in `library_data.txt`
+* Load books automatically when the program starts
+* Prevent duplicate entries after restarting the program
+* Handle missing file errors
 
 ---
 
-## OOP Concepts Used
+## Technologies Used
 
-* Classes and Objects
-* Constructors (`__init__`)
-* Methods
+* Python 3
+* Object-Oriented Programming
+* File Handling
 * Dictionaries
-* Encapsulation
-* Object Composition
-* Conditional Statements
-* Loops
+
+---
+
+## Project Structure
+
+```text
+Library-Management-System/
+│
+├── main.py
+├── library_data.txt
+└── README.md
+```
 
 ---
 
@@ -50,16 +72,19 @@ This project allows users to manage books in a library by adding, searching, bor
 
 Methods:
 
-* `show_library()`
 * `add_book()`
-* `search_book()`
 * `remove_book()`
+* `search_book()`
 * `show_all_books()`
 * `library_stats()`
 * `search_by_title()`
 * `search_by_author()`
-* `check_availability()`
+* `search_partial_title()`
 * `count_book_by_author()`
+* `check_availability()`
+* `load_books()`
+
+---
 
 ### Book Class
 
@@ -72,71 +97,71 @@ Methods:
 
 ---
 
-## Example Usage
+## File Storage
 
-```python
-b1 = Book(101, "Python Basics", "Rudhraksh")
-b2 = Book(102, "C++ Basics", "Swayam")
+Books are stored in:
 
-l1 = Library("Mumbai Library", "Mumbai")
+```text
+library_data.txt
+```
 
-l1.add_book(b1)
-l1.add_book(b2)
+Format:
 
-count = l1.count_book_by_author("Swayam")
-print("Total Books:", count)
+```text
+101,Python Basics,Rudhraksh
+102,C++ Basics,Swayam
+```
 
-l1.check_availability(101)
+Each line represents one book.
 
-result = l1.search_by_title("Python Basics")
+---
 
-for book in result:
-    book.show_book()
+## How to Run
+
+1. Clone the repository.
+
+```bash
+git clone <repository-link>
+```
+
+2. Open the project in VS Code.
+
+3. Run:
+
+```bash
+python main.py
 ```
 
 ---
 
-## Current Version
+## Current Concepts Used
 
-Version: 0.5
-
-Completed Features
-
-1. Add Book
-2. Search Book by ID
-3. Remove Book
-4. Show All Books
-5. Library Statistics
-6. Borrow Book
-7. Return Book
-8. Update Title
-9. Search by Title
-10. Search by Author
-11. Check Availability
-12. Count Books by Author
+* Classes and Objects
+* Constructors
+* Methods
+* Dictionaries
+* Loops
+* Conditionals
+* File Handling
+* Exception Handling
+* Data Persistence
 
 ---
 
 ## Future Improvements
 
-* Update Author
-* Search by Partial Title
-* Search by Partial Author
-* Employee Management
-* Fine Management System
-* Issue Date Tracking
-* Return Date Tracking
-* File Handling
-* JSON Data Storage
-* SQLite Database Integration
-* Login System
-* GUI Version Using Tkinter
-* Web Version Using Flask or Django
+* Menu-driven interface
+* Save borrowed status in file
+* Delete book data from file
+* Update book data in file
+* User login system
+* GUI using Tkinter
+* Database integration using SQLite
 
 ---
 
 ## Author
 
-Rudhraksh Shukla
+**Rudhraksh Shukla**
 
-Python OOP Learning Project
+Python Learning Project – Library Management System
