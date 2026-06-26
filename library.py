@@ -17,28 +17,23 @@ class Library:
         else:
             self.books[book.book_id] = book
         
-            with open("library_data.txt", "a") as file:
-                file.write(f"{book.book_id},{book.title},{book.author}\n")
+            self.save_book()
             print("Book Added Successfully")
         
     def search_book(self,book_id):
-        if book_id == "    ":
-            print("Book Id Cannot be Empty")
-        elif book_id not in self.books:
+        if book_id not in self.books:
             print("Book Id Not Exists Please Enter Valid Id")
         else:
             return self.books[book_id]
             
     def remove_book(self,book_id):
-        if book_id == "   ":
-            print("Book Id Cannot be Empty")
-        elif book_id not in self.books:
+        if book_id not in self.books:
             print("Book Id Not Exists Please Enter Valid Id")
         else:
-            book =self.books[book_id]
             del self.books[book_id]
-            print("Book Removed Sucessfully")
-            return book
+            print("Book Removed Successfully")
+            self.save_book()
+
     def show_all_books(self):
         if len(self.books) == 0:
             print("No Books Available In Library")
@@ -129,9 +124,9 @@ class Library:
             with open("library_data.txt","r") as file:
                 for line in file:
                     data = line.strip().split(",")
-                    if len(data) == 3:
-                        book_id, title, author = data
-                        book = Book(int(book_id),title,author)
+                    if len(data) == 4:
+                        book_id, title, author, available = data
+                        book = Book(int(book_id),title,author,available = available == "True")
                         self.books[int(book_id)] = book
                     else:
                         print("Invalid data format in line:", line)
@@ -139,12 +134,42 @@ class Library:
         except FileNotFoundError:
             print("No Book Data Found")
 
+    def borrow_book(self,book_id):
+        if book_id not in self.books:
+            print("Book Not Exist")
+        else:
+            book = self.search_book(book_id)
+            if book.available:
+                book.available = False
+                self.save_book()
+                print("Book Borrowed Successfully")
+            else:
+                print("Book already borrowed.")
+
+    def return_book(self,book_id):
+        if book_id not in self.books:
+            print("Book Not Exist")
+        else:
+            book = self.search_book(book_id)
+            if not book.available :
+                book.available = True
+                self.save_book()
+                print("Book Returned Successfully")
+            else:
+                print("Book already Returned .")
+
+    def save_book(self):
+        with open("library_data.txt","w") as file:
+                    for b in self.books.values():
+                        file.write(f"{b.book_id},{b.title},{b.author},{b.available}\n")
+                    print("Book Data Saved Successfully")
+
 class Book:
-    def __init__(self,book_id,title,author):
+    def __init__(self,book_id,title,author,available = True):
         self.book_id = book_id
         self.title = title
         self.author = author
-        self.available = True
+        self.available = available
     def show_book(self):
         print("=====Book-Info=====")
         print("Book Id:",self.book_id)
@@ -152,22 +177,8 @@ class Book:
         print("Author:",self.author)
         print("Available:",self.available)
         
-    def borrow_book(self):
-        if self.available :
-            print("Book Borrowed Successfully")
-            self.available = False
-        else:
-            print("Book Already Borrowed")
-            
-    def return_book(self):
-        if not self.available:
-            print("Book Returned Successfully")
-            self.available = True
-        else:
-            print("Book Was Not Borrowed")
-    
     def update_title(self, new_title):
-        if new_title.strip() == " ":
+        if new_title.strip() == "":
             print("Title Cannot Be Empty")
         else:
             self.title = new_title
@@ -178,4 +189,6 @@ b1 = Book(101,"Python Basics", "Rudhraksh")
 b2 = Book(102,"C++ Basics ","Swayam")
 l1 = Library("Mumbai Library", "Mumbai")
 l1.load_book()
-l1.add_book(b2)
+#l1.borrow_book(102)
+
+l1.return_book(102)
