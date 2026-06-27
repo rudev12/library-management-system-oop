@@ -1,47 +1,56 @@
 # Library Management System
 
-A simple Object-Oriented Library Management System built using Python.
-
-This project demonstrates the practical use of:
-
-* Object-Oriented Programming (OOP)
-* Classes and Objects
-* Dictionaries
-* File Handling
-* Data Persistence
-* Searching and Filtering
+A console-based Library Management System developed using Python and Object-Oriented Programming (OOP). This project allows users to manage books, search books, borrow and return books, and maintain library records using file handling.
 
 ---
 
-## Features
+## Project Features
 
-### Library Features
+### Book Management
 
 * Add new books
-* Prevent duplicate book IDs
-* Search books by ID
-* Remove books
-* Display all books
-* Check book availability
-* Library statistics
-* Count books by author
+* Remove existing books
+* Update book titles
+* Display book information
+
+### Search System
+
 * Search books by title
 * Search books by author
 * Partial title search
+* Partial author search
+* Display total matching books
 
-### Book Features
+### Borrow and Return System
 
 * Borrow books
 * Return books
-* Update book title
-* Display book details
+* Check book availability
+* Prevent borrowing unavailable books
 
-### File Handling Features
+### File Handling
 
-* Save books permanently in `library_data.txt`
-* Load books automatically when the program starts
-* Prevent duplicate entries after restarting the program
-* Handle missing file errors
+* Save library data automatically
+* Load books from file during startup
+* Maintain book availability status
+
+### Library Statistics
+
+* Total books
+* Available books
+* Borrowed books
+
+### Menu Driven System
+
+* Add Book
+* Remove Book
+* Search By Title
+* Search By Author
+* Borrow Book
+* Return Book
+* Show All Books
+* Library Statistics
+* Exit
 
 ---
 
@@ -50,54 +59,71 @@ This project demonstrates the practical use of:
 * Python 3
 * Object-Oriented Programming
 * File Handling
-* Dictionaries
+* Exception Handling
+* Dictionary Data Structure
 
 ---
 
 ## Project Structure
 
 ```text
-Library-Management-System/
+Library Management System
 │
-├── main.py
-├── library_data.txt
-└── README.md
+├── Book Class
+├── Library Class
+├── Menu System
+└── library_data.txt
 ```
 
 ---
 
 ## Classes
 
-### Library Class
-
-Methods:
-
-* `add_book()`
-* `remove_book()`
-* `search_book()`
-* `show_all_books()`
-* `library_stats()`
-* `search_by_title()`
-* `search_by_author()`
-* `search_partial_title()`
-* `count_book_by_author()`
-* `check_availability()`
-* `load_books()`
-
----
-
 ### Book Class
 
+Responsible for:
+
+* Book ID
+* Title
+* Author
+* Availability Status
+
 Methods:
 
-* `show_book()`
-* `borrow_book()`
-* `return_book()`
-* `update_title()`
+* show_book()
+* update_title()
 
 ---
 
-## File Storage
+### Library Class
+
+Responsible for:
+
+* Managing books
+* Searching books
+* Borrowing books
+* Returning books
+* Saving data
+* Loading data
+* Library statistics
+
+Methods:
+
+* add_book()
+* remove_book()
+* search_book()
+* search_by_title()
+* search_by_author()
+* borrow_book()
+* return_book()
+* show_all_books()
+* library_stats()
+* save_book()
+* load_book()
+
+---
+
+## Data Storage
 
 Books are stored in:
 
@@ -108,25 +134,23 @@ library_data.txt
 Format:
 
 ```text
-101,Python Basics,Rudhraksh
-102,C++ Basics,Swayam
+101,Python Basics,Rudhraksh,True
+102,C++ Basics,Swayam,False
 ```
 
-Each line represents one book.
+Where:
+
+* True = Available
+* False = Borrowed
 
 ---
 
 ## How to Run
 
-1. Clone the repository.
-
-```bash
-git clone <repository-link>
-```
-
-2. Open the project in VS Code.
-
-3. Run:
+1. Install Python 3.
+2. Download the project files.
+3. Open the terminal.
+4. Run:
 
 ```bash
 python main.py
@@ -134,34 +158,34 @@ python main.py
 
 ---
 
-## Current Concepts Used
+## Concepts Used
 
 * Classes and Objects
-* Constructors
-* Methods
+* Encapsulation
 * Dictionaries
 * Loops
-* Conditionals
-* File Handling
+* Conditional Statements
 * Exception Handling
-* Data Persistence
+* File Handling
+* Object-Oriented Programming
+* Menu Driven Programs
 
 ---
 
 ## Future Improvements
 
-* Menu-driven interface
-* Save borrowed status in file
-* Delete book data from file
-* Update book data in file
-* User login system
-* GUI using Tkinter
-* Database integration using SQLite
+* Employee Management
+* Book Issue History
+* Automatic Book IDs
+* Fine Calculation System
+* User Accounts
+* GUI Version using Tkinter
+* Database Integration using SQLite
 
 ---
 
 ## Author
 
-**Rudhraksh Shukla**
+Rudhraksh Shukla
 
-Python Learning Project – Library Management System
+Library Management System using Python and Object-Oriented Programming.
