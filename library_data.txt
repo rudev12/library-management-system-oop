@@ -1,2 +1,10 @@
-101,Python Basics,Rudhraksh
-102,C++ Basics ,Swayam
+101,Python Basics,Eric Matthes,True
+102,Clean Code,Robert C. Martin,False
+103,The C Programming Language,Dennis Ritchie,True
+104,Head First Java,Kathy Sierra,False
+105,Introduction to Algorithms,Thomas H. Cormen,True
+106,Data Structures and Algorithms in Python,Michael T. Goodrich,True
+107,Computer Networks,Andrew S. Tanenbaum,False
+108,Operating System Concepts,Abraham Silberschatz,True
+109,Artificial Intelligence: A Modern Approach,Stuart Russell,True
+110,The Pragmatic Programmer,Andrew Hunt,False
