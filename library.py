@@ -17,7 +17,7 @@ class Library:
         else:
             self.books[book.book_id] = book
         
-            self.save_book()
+            self.save_books()
             print("Book Added Successfully")
         
     def search_book(self,book_id):
@@ -32,7 +32,7 @@ class Library:
         else:
             del self.books[book_id]
             print("Book Removed Successfully")
-            self.save_book()
+            self.save_books()
 
     def show_all_books(self):
         if len(self.books) == 0:
@@ -59,17 +59,20 @@ class Library:
             
     def search_by_title(self,book_title):
         matched_book = []
+        
         if book_title.strip()== "":
             print("Title Cannot Be Empty")
         else:
             for book in self.books.values():
-                if book.title == book_title:
+                if book_title.lower() in book.title.lower():
                     matched_book.append(book)
-        
-        
+
         if len(matched_book) == 0:
             print("No Book Found")
-        
+        else:
+            print("Total Books Found:",len(matched_book))
+            for book in matched_book:
+                book.show_book()
         return matched_book
         
         
@@ -77,12 +80,19 @@ class Library:
         matched_author = []
         if author.strip() == "":
             print("Author Name Cannot Be Empty")
+            return []
             
-        for book in self.books.values():
-            if book.author == author:
+        for book in self.books.values(): 
+            if author.lower() in book.author.lower():
                 matched_author.append(book)
+                
+        
         if len(matched_author) == 0:
             print("No Author's Book Found")
+        else:
+            print("Total Books By Author :",(len(matched_author)))
+            for book in matched_author:
+                book.show_book()
         
         return matched_author
     
@@ -93,32 +103,7 @@ class Library:
                 print(book_id,":","Book is Available")
             else:
                 print(book_id,":","Book Not Available")
-                
-    def count_book_by_author(self,author):
-        author_count = 0
-        if author.strip() == "":
-            print("Author Name Cannot Be Empty")
-        else:
-            for book in self.books.values():
-                if book.author == author:
-                    author_count += 1 
-        
-        return author_count
-        
-    def search_partial_title(self,title):
-        matched_book = []
-        if title.strip() == "":
-            print("Title Cannot Be Empty")
-        else:
-            for book in self.books.values():
-                if title in book.title:
-                    matched_book.append(book)
-            
-        if len(matched_book) == 0:
-            print("No Book Found")
-            
-        return matched_book
-    
+  
     def load_book(self):
         try:
             with open("library_data.txt","r") as file:
@@ -141,7 +126,7 @@ class Library:
             book = self.search_book(book_id)
             if book.available:
                 book.available = False
-                self.save_book()
+                self.save_books()
                 print("Book Borrowed Successfully")
             else:
                 print("Book already borrowed.")
@@ -153,17 +138,24 @@ class Library:
             book = self.search_book(book_id)
             if not book.available :
                 book.available = True
-                self.save_book()
+                self.save_books()
                 print("Book Returned Successfully")
             else:
                 print("Book already Returned .")
 
-    def save_book(self):
+    def save_books(self):
         with open("library_data.txt","w") as file:
                     for b in self.books.values():
                         file.write(f"{b.book_id},{b.title},{b.author},{b.available}\n")
                     print("Book Data Saved Successfully")
-
+    
+    def update_title(self,book_id,new_title):
+        if book_id not in self.books:
+            print("Book Not Exist")
+        else:
+            book = self.search_book(book_id)
+            book.update_title(new_title)
+            self.save_books()
 class Book:
     def __init__(self,book_id,title,author,available = True):
         self.book_id = book_id
@@ -177,18 +169,82 @@ class Book:
         print("Author:",self.author)
         print("Available:",self.available)
         
-    def update_title(self, new_title):
-        if new_title.strip() == "":
-            print("Title Cannot Be Empty")
-        else:
-            self.title = new_title
-            print("Title Updated Successfully")
-            print("Title:",self.title)
-        
-b1 = Book(101,"Python Basics", "Rudhraksh")
-b2 = Book(102,"C++ Basics ","Swayam")
 l1 = Library("Mumbai Library", "Mumbai")
 l1.load_book()
-#l1.borrow_book(102)
 
-l1.return_book(102)
+while True:
+    print("\n===== LIBRARY MENU =====")
+    print("1. Add Book")
+    print("2. Remove Book")
+    print("3. Search By Title")
+    print("4. Search By Author")
+    print("5. Borrow Book")
+    print("6. Return Book")
+    print("7. Show All Books")
+    print("8. Library Statistics")
+    print("9. Exit")
+    
+    choice = input("Enter your Choice:" )
+    
+    if choice == "1":
+        try:
+            book_id = int(input("Enter Book Id: "))
+            title = input("Enter a Book Title: ")
+            author = input("Enter Author Name: ")
+        except ValueError:
+            print("Book Id Cannot be Alphabet, Plz Try Again")
+            continue
+        
+        book = Book(book_id,title,author)
+        l1.add_book(book)
+        
+    elif choice == "2":
+        try:
+            book_id = int(input("Enter Book Id: "))
+        except ValueError:
+            print("Book Id Cannot be Alphabet, Plz Try Again")
+            continue
+        
+        l1.remove_book(book_id)
+        
+    elif choice == "3":
+        book_title = input("Enter Book Title: ")
+        
+        l1.search_by_title(book_title)
+    
+    elif choice == "4":
+        author = input("Enter Author Name: ")
+      
+        l1.search_by_author(author)
+        
+    elif choice == "5":
+        try:
+            book_id = int(input("Enter Book Id: "))
+        except ValueError:
+            print("Book Id Cannot be Alphabet, Plz Try Again")
+            continue
+        
+        l1.borrow_book(book_id)
+        
+    elif choice == "6":
+        try:
+            book_id = int(input("Enter Book Id: "))
+        except ValueError:
+            print("Book Id Cannot be Alphabet, Plz Try Again")
+            continue
+        
+        l1.return_book(book_id)
+        
+    elif choice == "7":
+        
+        l1.show_all_books()
+        
+    elif choice == "8":
+        
+        l1.library_stats()
+        
+    elif choice == "9":
+        print("Exiting")
+        break
+    else:
+        print("Invalid Choice")
