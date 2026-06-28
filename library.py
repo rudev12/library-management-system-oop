@@ -16,7 +16,6 @@ class Library:
             print("Book Alredy Exists, Please Enter Valid Book Id")
         else:
             self.books[book.book_id] = book
-        
             self.save_books()
             print("Book Added Successfully")
         
@@ -156,6 +155,12 @@ class Library:
             book = self.search_book(book_id)
             book.update_title(new_title)
             self.save_books()
+
+    def generate_book_id(self):
+        if len(self.books) == 0:
+            return 101
+        
+        return max(self.books.keys()) +1        
 class Book:
     def __init__(self,book_id,title,author,available = True):
         self.book_id = book_id
@@ -187,14 +192,10 @@ while True:
     choice = input("Enter your Choice:" )
     
     if choice == "1":
-        try:
-            book_id = int(input("Enter Book Id: "))
-            title = input("Enter a Book Title: ")
-            author = input("Enter Author Name: ")
-        except ValueError:
-            print("Book Id Cannot be Alphabet, Plz Try Again")
-            continue
-        
+        book_id = l1.generate_book_id()
+        print("Genrated Book Id:",book_id)
+        title = input("Enter a Book Title: ")
+        author = input("Enter Author Name: ")
         book = Book(book_id,title,author)
         l1.add_book(book)
         
