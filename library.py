@@ -29,6 +29,8 @@ class Library:
         if book_id not in self.books:
             print("Book Id Not Exists Please Enter Valid Id")
         else:
+            book = self.books[book_id]
+            self.save_deleted_book(book)
             del self.books[book_id]
             print("Book Removed Successfully")
             self.save_books()
@@ -160,7 +162,96 @@ class Library:
         if len(self.books) == 0:
             return 101
         
-        return max(self.books.keys()) +1        
+        return max(self.books.keys()) +1 
+
+    def save_deleted_book(self,book):
+        with open("deleted_books.txt","a") as file:
+            file.write(f"{book.book_id},{book.title},{book.author},{book.available}\n") 
+    
+    def load_deleted_books(self):
+        deleted_books = []
+        try:
+            with open("deleted_books.txt","r") as file:
+                for line in file:
+                    data = line.strip().split(",")
+                    if len(data) == 4:
+                        book_id ,title,author,available = data
+                        book = Book(
+                            int(book_id),title,author,available = available =="True"
+                            )
+                        deleted_books.append(book)
+        except FileNotFoundError:
+            print("No Deleted Book Found")
+        
+        return deleted_books
+    
+    def show_deleted_books(self):
+        deleted_books = self.load_deleted_books()
+        if not deleted_books:
+            print("No Deleted Book Found")
+        else:
+            print("Total Deleted Books:",len(deleted_books))
+            for book in deleted_books:
+                book.show_book()
+
+    def restore_deleted_book(self, book_id):
+        deleted_books = self.load_deleted_books()
+
+        if not deleted_books:
+            print("No Book Found In Deleted Books")
+            return
+        found = False
+
+        for book in deleted_books:
+
+            if book.book_id == book_id:
+                found = True
+
+                if book.book_id in self.books:
+                    print("Book Already In Library")
+                    return
+
+                print("\nBook Found")
+                book.show_book()
+
+                confirmation = input(
+                    "Are you sure you want to restore this book? (yes/no): "
+                    )
+
+                if confirmation.lower() == "yes":
+                    self.books[book.book_id] = book
+                    self.save_books()
+
+                    deleted_books.remove(book)
+
+                    with open("deleted_books.txt", "w") as file:
+                        for b in deleted_books:
+                            file.write(
+                                f"{b.book_id},{b.title},{b.author},{b.available}\n"
+                            )
+
+                    print("Book Restored Successfully")
+
+                elif confirmation.lower() == "no":
+                    print("Restoration Cancelled")
+
+                else:
+                    print("Invalid Input")
+
+                return
+
+        if not found:
+            print("Book Id Not Found")
+
+    def restore_all_deleted_books(self):
+        deleted_books = self.load_deleted_books()
+        if not deleted_books:
+            print("No Deleted Book Found")
+        else:
+            for book in deleted_books:
+                if book.book_id not in self.books:
+                    self.books[book.book_id] = book
+            self.save_books()
 class Book:
     def __init__(self,book_id,title,author,available = True):
         self.book_id = book_id
@@ -187,7 +278,8 @@ while True:
     print("6. Return Book")
     print("7. Show All Books")
     print("8. Library Statistics")
-    print("9. Exit")
+    print("9. Restore Deleted Books")
+    print("10. Exit")
     
     choice = input("Enter your Choice:" )
     
@@ -243,8 +335,16 @@ while True:
     elif choice == "8":
         
         l1.library_stats()
-        
     elif choice == "9":
+        try:
+            book_id =input("Enter Book id :")
+            l1.restore_deleted_book(book_id)
+            
+        except ValueError:
+            print("Book id cannot Be Alphabet")
+        
+        
+    elif choice == "10":
         print("Exiting")
         break
     else:
