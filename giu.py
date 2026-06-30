@@ -2,11 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 
 
-# ----------------------------------------------------------------------
-# ORIGINAL BACKEND LOGIC (unchanged in behavior, print() calls kept so
-# the console still logs activity, but GUI dialogs are used for actual
-# user-facing feedback)
-# ----------------------------------------------------------------------
+
 class Book:
     def __init__(self, book_id, title, author, available=True):
         self.book_id = book_id
