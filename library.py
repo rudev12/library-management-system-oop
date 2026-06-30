@@ -206,7 +206,6 @@ class Library:
 
             if book.book_id == book_id:
                 found = True
-
                 if book.book_id in self.books:
                     print("Book Already In Library")
                     return
@@ -221,9 +220,7 @@ class Library:
                 if confirmation.lower() == "yes":
                     self.books[book.book_id] = book
                     self.save_books()
-
                     deleted_books.remove(book)
-
                     with open("deleted_books.txt", "w") as file:
                         for b in deleted_books:
                             file.write(
@@ -267,7 +264,7 @@ class Book:
         
 l1 = Library("Mumbai Library", "Mumbai")
 l1.load_book()
-
+l1.load_deleted_books()
 while True:
     print("\n===== LIBRARY MENU =====")
     print("1. Add Book")
@@ -337,7 +334,7 @@ while True:
         l1.library_stats()
     elif choice == "9":
         try:
-            book_id =input("Enter Book id :")
+            book_id =int(input("Enter Book id :"))
             l1.restore_deleted_book(book_id)
             
         except ValueError:
