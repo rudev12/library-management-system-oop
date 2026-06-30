@@ -43,10 +43,8 @@ The application's backend logic and core functionality were designed and impleme
 ```
 Library Management System/
 │
-├── book.py
 ├── library.py
 ├── gui.py
-├── main.py
 ├── books.txt
 ├── deleted_books.txt
 ├── README.md
