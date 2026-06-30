@@ -139,3 +139,6 @@ No AI-generated backend logic was used in the core functionality of the project.
 ## Author
 
 Developed by Rudhraksh Shukla as a Python Object-Oriented Programming project for learning software design, file handling, debugging, and desktop application development.
+
+##Screeshot
+<img width="1910" height="1007" alt="Screenshot 2026-06-30 213008" src="https://github.com/user-attachments/assets/ab720ccc-6be1-4e3f-928c-38172366fc36" />
