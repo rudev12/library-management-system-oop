@@ -1,191 +1,141 @@
 # Library Management System
 
-A console-based Library Management System developed using Python and Object-Oriented Programming (OOP). This project allows users to manage books, search books, borrow and return books, and maintain library records using file handling.
+## Overview
+
+Library Management System is a desktop application developed in Python using Object-Oriented Programming principles. The project provides a complete solution for managing books in a library, including book addition, removal, searching, borrowing, returning, restoring deleted books, and maintaining persistent storage.
+
+The application's backend logic and core functionality were designed and implemented manually. A graphical user interface (GUI) was later integrated to provide a better user experience.
 
 ---
 
-## Project Features
-
-### Book Management
+## Features
 
 * Add new books
-* Remove existing books
-* Update book titles
-* Display book information
-
-### Search System
-
+* Automatic Book ID generation
+* Remove books
 * Search books by title
 * Search books by author
-* Partial title search
-* Partial author search
-* Display total matching books
-
-### Borrow and Return System
-
 * Borrow books
-* Return books
-* Check book availability
-* Prevent borrowing unavailable books
-
-### File Handling
-
-* Save library data automatically
-* Load books from file during startup
-* Maintain book availability status
-
-### Library Statistics
-
-* Total books
-* Available books
-* Borrowed books
-
-### Menu Driven System
-
-* Add Book
-* Remove Book
-* Search By Title
-* Search By Author
-* Borrow Book
-* Return Book
-* Show All Books
-* Library Statistics
-* Exit
+* Return borrowed books
+* Display all available books
+* Library statistics
+* Store library data permanently using text files
+* Maintain deleted book records
+* Restore deleted books
+* User-friendly graphical interface
 
 ---
 
 ## Technologies Used
 
 * Python 3
-* Object-Oriented Programming
+* Object-Oriented Programming (OOP)
+* Tkinter (GUI)
 * File Handling
+* Dictionaries
+* Lists
 * Exception Handling
-* Dictionary Data Structure
 
 ---
 
 ## Project Structure
 
-```text
-Library Management System
+```
+Library Management System/
 │
-├── Book Class
-├── Library Class
-├── Menu System
-└── library_data.txt
+├── book.py
+├── library.py
+├── gui.py
+├── main.py
+├── books.txt
+├── deleted_books.txt
+├── README.md
 ```
 
 ---
 
-## Classes
+## Core Functionalities
 
-### Book Class
+### Book Management
 
-Responsible for:
+* Create new books
+* Remove existing books
+* Automatic Book ID generation
+* Persistent storage
 
-* Book ID
-* Title
-* Author
-* Availability Status
+### Search System
 
-Methods:
+* Search by title
+* Search by author
+* Partial search support
 
-* show_book()
-* update_title()
+### Borrowing System
 
----
+* Borrow available books
+* Return borrowed books
+* Availability tracking
 
-### Library Class
+### Deleted Book Management
 
-Responsible for:
+* Save deleted books
+* Display deleted books
+* Restore deleted books
 
-* Managing books
-* Searching books
-* Borrowing books
-* Returning books
-* Saving data
-* Loading data
-* Library statistics
+### Statistics
 
-Methods:
-
-* add_book()
-* remove_book()
-* search_book()
-* search_by_title()
-* search_by_author()
-* borrow_book()
-* return_book()
-* show_all_books()
-* library_stats()
-* save_book()
-* load_book()
+* Total books
+* Available books
+* Borrowed books
 
 ---
 
-## Data Storage
-
-Books are stored in:
-
-```text
-library_data.txt
-```
-
-Format:
-
-```text
-101,Python Basics,Rudhraksh,True
-102,C++ Basics,Swayam,False
-```
-
-Where:
-
-* True = Available
-* False = Borrowed
-
----
-
-## How to Run
-
-1. Install Python 3.
-2. Download the project files.
-3. Open the terminal.
-4. Run:
-
-```bash
-python main.py
-```
-
----
-
-## Concepts Used
+## Programming Concepts Used
 
 * Classes and Objects
-* Encapsulation
+* Constructors
+* Methods
 * Dictionaries
+* Lists
 * Loops
 * Conditional Statements
 * Exception Handling
-* File Handling
-* Object-Oriented Programming
-* Menu Driven Programs
+* File Reading
+* File Writing
+* Modular Programming
+
+---
+
+## Development Process
+
+The project was developed incrementally by first implementing the complete backend logic through a console-based application. Each feature was individually tested and debugged before proceeding to the next stage.
+
+Once the backend became stable, a graphical user interface was integrated to improve usability.
+
+---
+
+## AI Usage Disclosure
+
+The backend logic, Object-Oriented design, file handling, application flow, and all core functionality were implemented manually by the project author.
+
+Artificial Intelligence was used to assist in the development of the graphical user interface (GUI). The generated GUI code was reviewed, integrated, tested, and adapted to work with the existing backend implementation.
+
+No AI-generated backend logic was used in the core functionality of the project.
 
 ---
 
 ## Future Improvements
 
-* Employee Management
-* Book Issue History
-* Automatic Book IDs
-* Fine Calculation System
-* User Accounts
-* GUI Version using Tkinter
-* Database Integration using SQLite
+* SQLite database integration
+* User authentication
+* Book categories
+* Fine management
+* Member management
+* Export reports
+* Barcode support
+* Cloud synchronization
 
 ---
 
 ## Author
 
-Rudhraksh Shukla
-
-Library Management System using Python and Object-Oriented Programming.
+Developed by Rudhraksh Shukla as a Python Object-Oriented Programming project for learning software design, file handling, debugging, and desktop application development.
