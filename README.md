@@ -35,14 +35,14 @@ The current version of the project uses hardcoded credentials for demonstration 
 
 ### Admin Login
 
-```text id="d5v8a1"
+```text
 Username: adminrudev12
 Password: rudev12
 ```
 
 ### Front Desk Login
 
-```text id="r9k2xm"
+```text
 Username: deskrudev12
 Password: rudev123
 ```
@@ -103,7 +103,7 @@ Instead of permanently deleting a book immediately, the system moves the book fr
 
 The deletion flow is:
 
-```text id="v4s8kh"
+```text
 books
   |
   | Delete
@@ -113,7 +113,7 @@ deleted_books
 
 The restoration flow is:
 
-```text id="f0p6zc"
+```text
 deleted_books
   |
   | Restore
@@ -125,7 +125,7 @@ This allows deleted books to be restored later.
 
 ## Project Structure
 
-```text id="e1a3nv"
+```text
 Library project/
 │
 ├── main.py
@@ -135,8 +135,11 @@ Library project/
 ├── library.py
 ├── database.py
 ├── book.py
-└── library.db
+├── README.md
+└── .gitignore
 ```
+
+The SQLite database file is not included in the repository. It is created locally when the application initializes the required database tables.
 
 ### `main.py`
 
@@ -222,13 +225,13 @@ It also provides functionality for displaying book information.
 
 The project uses SQLite as its database system.
 
-Two main tables are used:
+The application uses two main tables:
 
 ### `books`
 
 Stores active library books.
 
-```text id="m7y0qv"
+```text
 book_id
 title
 author
@@ -240,7 +243,7 @@ availability
 
 Stores books that have been removed from the active library.
 
-```text id="c2z9wp"
+```text
 book_id
 title
 author
@@ -262,27 +265,35 @@ The `book_id` is used to identify books and maintain their records between the a
 
 ### 1. Clone the repository
 
-```bash id="p3h7yx"
+```bash
 git clone <your-repository-url>
 ```
 
 ### 2. Open the project directory
 
-```bash id="n5d2qc"
+```bash
 cd Library-project
 ```
 
 ### 3. Run the application
 
-```bash id="z8f1km"
+```bash
 python main.py
 ```
 
-### 4. Select a Login Type
+### 4. Database Setup
+
+The SQLite database file is not included in the GitHub repository.
+
+When the application is initialized, the required database tables are created locally.
+
+No pre-existing `library.db` file is required to run the project.
+
+### 5. Select a Login Type
 
 Choose one of the available options:
 
-```text id="u6w4bx"
+```text
 1. Login As Admin
 2. Login As Front Desk
 ```
@@ -293,7 +304,7 @@ Use the demo credentials provided above to access the corresponding console.
 
 The application follows a modular structure that separates authentication, user interfaces, library business logic, and database operations.
 
-```text id="k3n8vf"
+```text
                     User
                       |
                       v
