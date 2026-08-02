@@ -2,7 +2,7 @@
 def admin(username,password):
     username_0 = "adminrudev12"
     password_1 ="rudev12"
-    if username.lower() == username_0 and password.lower() == password_1:
+    if username == username_0 and password == password_1:
        print("Welcome back,Admin!")
        return True 
     else:
@@ -12,7 +12,7 @@ def admin(username,password):
 def front_desk(username,password):
     username_0 ="deskrudev12"
     password_1 ="rudev123"
-    if username.lower() == username_0 and password.lower() == password_1:
+    if username == username_0 and password == password_1:
         print("Welcome back!")
         return True  
     else:
