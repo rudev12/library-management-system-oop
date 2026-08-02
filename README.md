@@ -1,142 +1,368 @@
 # Library Management System
 
-## Overview
-
-Library Management System is a desktop application developed in Python using Object-Oriented Programming principles. The project provides a complete solution for managing books in a library, including book addition, removal, searching, borrowing, returning, restoring deleted books, and maintaining persistent storage.
-
-The application's backend logic and core functionality were designed and implemented manually. A graphical user interface (GUI) was later integrated to provide a better user experience.
-
----
+A console-based Library Management System developed in Python using Object-Oriented Programming and SQLite. The project manages books, borrowing and returning operations, searching, deletion and restoration of books, and role-based access through Admin and Front Desk login systems.
 
 ## Features
 
-* Add new books
-* Automatic Book ID generation
-* Remove books
-* Search books by title
-* Search books by author
-* Borrow books
-* Return borrowed books
-* Display all available books
-* Library statistics
-* Store library data permanently using text files
-* Maintain deleted book records
-* Restore deleted books
-* User-friendly graphical interface
+### Authentication and Role-Based Access
 
----
+The system provides two types of users:
 
-## Technologies Used
+* **Admin**
 
-* Python 3
-* Object-Oriented Programming (OOP)
-* Tkinter (GUI)
-* File Handling
-* Dictionaries
-* Lists
-* Exception Handling
+  * Add new books
+  * Remove books
+  * Search books by title
+  * Search books by author
+  * Borrow books
+  * Return books
+  * View all books
+  * Restore deleted books
 
----
+* **Front Desk**
+
+  * Search books by title
+  * Search books by author
+  * Borrow books
+  * Return books
+  * View all books
+
+After successful authentication, the user is directed to the appropriate console based on their role.
+
+## Demo Login Credentials
+
+The current version of the project uses hardcoded credentials for demonstration and testing purposes.
+
+### Admin Login
+
+```text id="d5v8a1"
+Username: adminrudev12
+Password: rudev12
+```
+
+### Front Desk Login
+
+```text id="r9k2xm"
+Username: deskrudev12
+Password: rudev123
+```
+
+These credentials are provided so users can test the application after cloning the repository.
+
+**Note:** The current authentication system is intended for learning and demonstration purposes and is not suitable for production use.
+
+## Book Management
+
+The system allows the Admin to:
+
+* Add books with title, author, and genre
+* Prevent duplicate books based on title and author
+* Remove books from the active book database
+* Move deleted books to a separate deleted-books table
+* Restore previously deleted books
+
+Each book contains:
+
+* Book ID
+* Title
+* Author
+* Genre
+* Availability status
+
+## Search Functionality
+
+Books can be searched using:
+
+* Title
+* Author
+
+The search supports partial text matching, allowing users to find books without entering the complete title or author name.
+
+## Borrow and Return System
+
+The system maintains book availability using two states:
+
+* `Available`
+* `Borrowed`
+
+Before borrowing a book, the system checks:
+
+1. Whether the Book ID exists
+2. Whether the book is already borrowed
+
+Before returning a book, the system checks:
+
+1. Whether the Book ID exists
+2. Whether the book is already available
+
+This prevents invalid borrowing and returning operations.
+
+## Delete and Restore System
+
+Instead of permanently deleting a book immediately, the system moves the book from the `books` table to the `deleted_books` table.
+
+The deletion flow is:
+
+```text id="v4s8kh"
+books
+  |
+  | Delete
+  v
+deleted_books
+```
+
+The restoration flow is:
+
+```text id="f0p6zc"
+deleted_books
+  |
+  | Restore
+  v
+books
+```
+
+This allows deleted books to be restored later.
 
 ## Project Structure
 
-```
-Library Management System/
+```text id="e1a3nv"
+Library project/
 │
+├── main.py
+├── login.py
+├── admin_console.py
+├── desk_console.py
 ├── library.py
-├── gui.py
-├── books.txt
-├── deleted_books.txt
-├── README.md
+├── database.py
+├── book.py
+└── library.db
 ```
 
----
+### `main.py`
 
-## Core Functionalities
+Acts as the entry point of the application.
 
-### Book Management
+It:
 
-* Create new books
-* Remove existing books
-* Automatic Book ID generation
-* Persistent storage
+* Starts the login process
+* Receives the authenticated user's role
+* Opens the Admin console for Admin users
+* Opens the Front Desk console for Front Desk users
 
-### Search System
+### `login.py`
 
-* Search by title
-* Search by author
-* Partial search support
+Handles user authentication and role selection.
 
-### Borrowing System
+It currently supports:
 
-* Borrow available books
-* Return borrowed books
-* Availability tracking
+* Admin login
+* Front Desk login
 
-### Deleted Book Management
+The login system returns the authenticated user's role to `main.py`.
 
-* Save deleted books
-* Display deleted books
-* Restore deleted books
+### `admin_console.py`
 
-### Statistics
+Provides the Admin interface with access to the administrative and library management operations currently implemented in the project.
 
-* Total books
-* Available books
-* Borrowed books
+### `desk_console.py`
 
----
+Provides a restricted interface for Front Desk users.
 
-## Programming Concepts Used
+Front Desk users can search, borrow, return, and view books but do not have access to administrative operations such as adding, deleting, or restoring books.
 
-* Classes and Objects
-* Constructors
-* Methods
-* Dictionaries
-* Lists
-* Loops
-* Conditional Statements
-* Exception Handling
-* File Reading
-* File Writing
-* Modular Programming
+### `library.py`
 
----
+Contains the main library business logic.
 
-## Development Process
+It manages operations such as:
 
-The project was developed incrementally by first implementing the complete backend logic through a console-based application. Each feature was individually tested and debugged before proceeding to the next stage.
+* Adding books
+* Searching books
+* Borrowing books
+* Returning books
+* Removing books
+* Restoring deleted books
+* Checking book availability
+* Displaying books
 
-Once the backend became stable, a graphical user interface was integrated to improve usability.
+The class communicates with the database layer to perform persistent data operations.
 
----
+### `database.py`
 
-## AI Usage Disclosure
+Handles SQLite database operations.
 
-The backend logic, Object-Oriented design, file handling, application flow, and all core functionality were implemented manually by the project author.
+It contains functionality for:
 
-Artificial Intelligence was used to assist in the development of the graphical user interface (GUI). The generated GUI code was reviewed, integrated, tested, and adapted to work with the existing backend implementation.
+* Creating database tables
+* Inserting books
+* Fetching books
+* Updating book availability
+* Updating book titles
+* Checking Book IDs
+* Checking duplicate books
+* Searching books
+* Moving books to the deleted-books table
+* Restoring deleted books
 
-No AI-generated backend logic was used in the core functionality of the project.
+The database layer is responsible for interacting with SQLite, while the Library class handles the higher-level business logic.
 
----
+### `book.py`
 
-## Future Improvements
+Contains the `Book` class, which represents a book object and stores:
 
+* Book ID
+* Title
+* Author
+* Genre
+* Availability
+
+It also provides functionality for displaying book information.
+
+## Database
+
+The project uses SQLite as its database system.
+
+Two main tables are used:
+
+### `books`
+
+Stores active library books.
+
+```text id="m7y0qv"
+book_id
+title
+author
+genre
+availability
+```
+
+### `deleted_books`
+
+Stores books that have been removed from the active library.
+
+```text id="c2z9wp"
+book_id
+title
+author
+genre
+availability
+```
+
+The `book_id` is used to identify books and maintain their records between the active and deleted-book tables.
+
+## Technologies Used
+
+* Python
+* Object-Oriented Programming
+* SQLite
+* SQL
+* Python `sqlite3` module
+
+## How to Run
+
+### 1. Clone the repository
+
+```bash id="p3h7yx"
+git clone <your-repository-url>
+```
+
+### 2. Open the project directory
+
+```bash id="n5d2qc"
+cd Library-project
+```
+
+### 3. Run the application
+
+```bash id="z8f1km"
+python main.py
+```
+
+### 4. Select a Login Type
+
+Choose one of the available options:
+
+```text id="u6w4bx"
+1. Login As Admin
+2. Login As Front Desk
+```
+
+Use the demo credentials provided above to access the corresponding console.
+
+## Application Architecture
+
+The application follows a modular structure that separates authentication, user interfaces, library business logic, and database operations.
+
+```text id="k3n8vf"
+                    User
+                      |
+                      v
+                  main.py
+                      |
+                      v
+                  login.py
+                      |
+                      v
+              Authentication
+                      |
+              +-------+-------+
+              |               |
+              v               v
+            Admin         Front Desk
+              |               |
+              v               v
+      admin_console.py   desk_console.py
+              |               |
+              +-------+-------+
+                      |
+                      v
+                  library.py
+                      |
+                      v
+                 database.py
+                      |
+                      v
+                   SQLite
+```
+
+The project is being developed incrementally, with the goal of maintaining a clear separation between business logic and database operations.
+
+## Future Development
+
+The following features and improvements are planned for future versions of the project:
+
+* Complete migration of remaining library features to SQLite
+* Implement Library Statistics using SQLite queries
+* Replace hardcoded login credentials with a SQLite-based user management system
+* Support multiple user accounts
+* Store user roles in the database
+* Improve role-based access control
+* Implement secure password handling
+* Add forgot-password and password-reset functionality
+* Improve database validation and error handling
+* Add automated testing
+* Further refactor and improve the project architecture as the system grows
+
+## Project Status
+
+The project is currently under active development.
+
+The core library management functionality, SQLite database integration, book borrowing and returning, book deletion and restoration, and role-based login system are currently implemented.
+
+Additional features and improvements will be added in future versions as the project continues to evolve.
+
+## Purpose
+
+This project was developed as a practical learning project to strengthen understanding of:
+
+* Python Object-Oriented Programming
+* Modular code organization
+* Separation of business logic and database operations
 * SQLite database integration
-* User authentication
-* Book categories
-* Fine management
-* Member management
-* Export reports
-* Barcode support
-* Cloud synchronization
+* SQL query handling
+* Authentication
+* Role-based access
+* Debugging and error handling
+* Software architecture
 
----
-
-## Author
-
-Developed by Rudhraksh Shukla as a Python Object-Oriented Programming project for learning software design, file handling, debugging, and desktop application development.
-
-##Screeshot
-<img width="1910" height="1007" alt="Screenshot 2026-06-30 213008" src="https://github.com/user-attachments/assets/ab720ccc-6be1-4e3f-928c-38172366fc36" />
+The project is being developed incrementally to apply programming concepts in a practical application rather than as a single completed system.
