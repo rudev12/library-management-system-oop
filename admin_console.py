@@ -16,7 +16,7 @@ while True:
     print("5. Borrow Book")
     print("6. Return Book")
     print("7. Show All Books")
-    print("8. Library Statistics")
+    print("8. Library Statistics,Work In Progress")
     print("9. Restore Deleted Books")
     print("10. Exit")
     
